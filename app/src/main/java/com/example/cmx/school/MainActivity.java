@@ -1,10 +1,8 @@
 package com.example.cmx.school;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,10 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.view.ViewPager;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.support.v4.app.FragmentPagerAdapter ;
 
+
+import com.wtu.school.fragment.ForthFragment;
+import com.wtu.school.fragment.OneFragment;
+import com.wtu.school.fragment.ThirdFragment;
+import com.wtu.school.fragment.TwoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        int width = wm.getDefaultDisplay().getWidth();
+        int height = wm.getDefaultDisplay().getHeight();
+        System.out.print(width+"我的手机宽高是："+height);
         initComp();
         initData();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -80,7 +87,15 @@ public class MainActivity extends AppCompatActivity
         viewPager = (ViewPager) findViewById(R.id.main_viewpager);
 
 
-
+        //实例化Fragment
+        OneFragment oneFrag = new OneFragment();
+        TwoFragment twoFrag = new TwoFragment();
+        ThirdFragment thirdFrag = new ThirdFragment();
+        ForthFragment forthFrag = new ForthFragment();
+        fragments.add(oneFrag );
+        fragments.add(twoFrag);
+        fragments.add(thirdFrag);
+        fragments.add(forthFrag);
 
     }
     private void initData() {
@@ -141,6 +156,8 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+
     }
 
     private void resertBtn() {
@@ -210,5 +227,23 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()) {
+            case R.id.main_btn_baoxiu:
+                viewPager.setCurrentItem(0);
+
+                break;
+            case R.id.main_btn_weixiu:
+                viewPager.setCurrentItem(1);
+                break;
+            case R.id.main_btn_my:
+                viewPager.setCurrentItem(2);
+                break;
+            case R.id.main_btn_more:
+                viewPager.setCurrentItem(3);
+                break;
+
+            default:
+                break;
+        }
     }
 }
