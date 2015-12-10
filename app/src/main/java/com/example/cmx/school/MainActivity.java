@@ -1,9 +1,13 @@
 package com.example.cmx.school;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.Layout;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,12 +20,19 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.support.v4.app.FragmentPagerAdapter ;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
+import com.wtu.school.activity.ImportActivity;
+import com.wtu.school.activity.MyActivity;
 import com.wtu.school.fragment.ForthFragment;
 import com.wtu.school.fragment.OneFragment;
 import com.wtu.school.fragment.ThirdFragment;
 import com.wtu.school.fragment.TwoFragment;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +40,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-
+//对navagiration 中的header中的空间
+    private TextView tvAndroid ;
+    private ImageView imageView_header ;
     private ViewPager viewPager;
     private FragmentPagerAdapter adapter;
     private List<Fragment> fragments = new ArrayList<Fragment>(); // 使用v4包中fragement
@@ -38,6 +51,8 @@ public class MainActivity extends AppCompatActivity
     private ImageButton ibtn_weixiu; // 按钮布局 维修
     private ImageButton ibtn_my; // 按钮布局 我的
     private ImageButton ibtn_more; // 按钮布局 更多
+
+    private LayoutInflater inflater ;
 
 
 
@@ -74,6 +89,30 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
     private void initComp(){
+        //layout/nav_header_main.xml 中的imageview
+        inflater = LayoutInflater.from(getApplicationContext()) ;
+        View view = inflater.inflate(R.layout.nav_header_main,null) ;
+
+        //
+        tvAndroid = (TextView) view.findViewById(R.id.androidstudio);
+        tvAndroid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MyActivity.class));
+                overridePendingTransition(R.anim.in_right_left,R.anim.out_right_left);
+            }
+        });
+
+        imageView_header = (ImageView) view.findViewById(R.id.imageView);
+        imageView_header.setOnClickListener(this);
+        imageView_header.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                startActivity(new Intent(MainActivity.this, MyActivity.class));
+                overridePendingTransition(R.anim.in_right_left,R.anim.out_right_left);
+                return true;
+            }
+        });
         ibtn_baoxiu = (ImageButton) findViewById(R.id.main_btn_baoxiu);
         ibtn_weixiu = (ImageButton) findViewById(R.id.main_btn_weixiu);
         ibtn_my = (ImageButton) findViewById(R.id.main_btn_my);
@@ -138,6 +177,9 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case 2:
 
+                       /* RelativeLayout relativeLayout  = (RelativeLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_main1,null);
+                        relativeLayout.removeView();
+                        relativeLayout.removeView();*/
                         ibtn_my.setBackgroundResource(R.drawable.selected03) ;
                         //changeBackground(currentIndex	, position) ;
                         break;
@@ -207,6 +249,11 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Intent intent = new Intent(MainActivity.this, ImportActivity.class);
+
+            startActivity(intent);
+           // finish();R.anim.in_right_left,R.anim.out_right_left
+            overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -217,6 +264,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+            startActivity(new Intent(MainActivity.this, MyActivity.class));
+            overridePendingTransition(R.anim.in_right_left,R.anim.out_right_left);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -241,7 +290,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.main_btn_more:
                 viewPager.setCurrentItem(3);
                 break;
+            case R.id.imageView:
 
+
+                startActivity(new Intent(MainActivity.this, MyActivity.class));
+                overridePendingTransition(R.anim.in_right_left,R.anim.out_right_left);
+
+                break;
             default:
                 break;
         }

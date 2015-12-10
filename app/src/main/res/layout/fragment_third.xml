@@ -2,10 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wtu.school.fragment.ThirdFragment">
+    tools:context="com.wtu.school.fragment.ThirdFragment"
+    android:background="#fff">
+
+    <com.wtu.school.customview.XListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_third_listview"
+        >
+
+    </com.wtu.school.customview.XListView>
+
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
    <HorizontalScrollView
@@ -18,7 +28,7 @@
        <LinearLayout
            android:layout_gravity="center"
            android:layout_width="match_parent"
-           android:layout_height="30dp">
+           android:layout_height="20dp">
        <TextView
            android:layout_width="40dp"
            android:layout_height="match_parent"
@@ -108,13 +118,19 @@
 
 
    </HorizontalScrollView>
-    <ListView
+        <com.wtu.school.customview.MyViewPager
+            android:id="@+id/fragment_third_viewpager"
+            android:layout_below="@id/fragment_third_hsv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            ></com.wtu.school.customview.MyViewPager>
+    &lt;!&ndash;<android.support.v4.view.ViewPager
         android:layout_below="@id/fragment_third_hsv"
-        android:id="@+id/fragment_third_listview"
+        android:id="@+id/fragment_third_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
 
-
-    </ListView>
-    </RelativeLayout>
+        ></android.support.v4.view.ViewPager>&ndash;&gt;
+    </RelativeLayout>-->
 </FrameLayout>

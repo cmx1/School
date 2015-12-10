@@ -30,6 +30,10 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.wtu.school.activity.ImportActivity"
+
+            ></activity>
+        <activity android:name="com.wtu.school.activity.MyActivity"></activity>
     </application>
 
 </manifest>
